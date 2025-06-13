@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<VBox alignment="CENTER" spacing="20" styleClass="root" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamlogger.frontend.controller.LoginController">
+   <children>
+      <!-- Close button -->
+      <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+         <children>
+            <Button fx:id="closeButton" onAction="#handleClose" styleClass="close-button" text="×" />
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" right="20.0" />
+         </VBox.margin>
+      </HBox>
+      
+      <!-- Login Container -->
+      <VBox alignment="CENTER" styleClass="login-container" spacing="25">
+         <children>
+            <!-- Logo/Title -->
+            <VBox alignment="CENTER" spacing="10">
+               <children>
+                  <Text styleClass="title-label" text="Team Logger" />
+                  <Text styleClass="subtitle-label" text="Sign in to your account" />
+               </children>
+            </VBox>
+            
+            <!-- Login Form -->
+            <VBox spacing="20" maxWidth="300">
+               <children>
+                  <!-- Username Field -->
+                  <VBox spacing="5">
+                     <children>
+                        <Label text="Username" />
+                        <TextField fx:id="usernameField" promptText="Enter your username" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Password Field -->
+                  <VBox spacing="5">
+                     <children>
+                        <Label text="Password" />
+                        <PasswordField fx:id="passwordField" promptText="Enter your password" />
+                     </children>
+                  </VBox>
+                  
+                  <!-- Remember Me Checkbox -->
+                  <HBox alignment="CENTER_LEFT" spacing="10">
+                     <children>
+                        <CheckBox fx:id="rememberMeCheckbox" text="Remember me" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Hyperlink fx:id="forgotPasswordLink" onAction="#handleForgotPassword" text="Forgot Password?" />
+                     </children>
+                  </HBox>
+                  
+                  <!-- Login Button -->
+                  <Button fx:id="loginButton" onAction="#handleLogin" styleClass="button" text="Sign In" />
+                  
+                  <!-- Error Message -->
+                  <Label fx:id="errorLabel" style="-fx-text-fill: #dc3545; -fx-font-size: 12px;" text="" visible="false" />
+                  
+                  <!-- Loading Indicator -->
+                  <ProgressIndicator fx:id="loadingIndicator" maxHeight="20" maxWidth="20" visible="false" />
+               </children>
+            </VBox>
+            
+            <!-- Footer -->
+            <VBox alignment="CENTER" spacing="10">
+               <children>
+                  <Text style="-fx-text-fill: #6c757d; -fx-font-size: 12px;" text="Don't have an account?" />
+                  <Hyperlink fx:id="registerLink" onAction="#handleRegister" text="Contact your administrator" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</VBox> 

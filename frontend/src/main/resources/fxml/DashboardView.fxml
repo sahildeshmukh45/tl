@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<HBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.teamlogger.frontend.controller.DashboardController">
+   <children>
+      <!-- Sidebar -->
+      <VBox styleClass="sidebar" spacing="10" prefWidth="250">
+         <children>
+            <!-- User Info -->
+            <VBox alignment="CENTER" spacing="10" style="-fx-padding: 20px;">
+               <children>
+                  <Text fx:id="userNameLabel" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;" text="Welcome" />
+                  <Text fx:id="userRoleLabel" style="-fx-text-fill: #bdc3c7; -fx-font-size: 14px;" text="User" />
+                  <Region style="-fx-background-color: #34495e; -fx-pref-height: 1px;" />
+               </children>
+            </VBox>
+            
+            <!-- Navigation Menu -->
+            <VBox spacing="5" style="-fx-padding: 0 20px;">
+               <children>
+                  <Button fx:id="dashboardButton" onAction="#showDashboard" styleClass="sidebar-button" text="📊 Dashboard" />
+                  <Button fx:id="timeTrackingButton" onAction="#showTimeTracking" styleClass="sidebar-button" text="⏰ Time Tracking" />
+                  <Button fx:id="projectsButton" onAction="#showProjects" styleClass="sidebar-button" text="📁 Projects" />
+                  <Button fx:id="tasksButton" onAction="#showTasks" styleClass="sidebar-button" text="✅ Tasks" />
+                  <Button fx:id="reportsButton" onAction="#showReports" styleClass="sidebar-button" text="📈 Reports" />
+                  
+                  <!-- Admin/Manager Options -->
+                  <Region style="-fx-pref-height: 20px;" />
+                  <Button fx:id="usersButton" onAction="#showUsers" styleClass="sidebar-button" text="👥 Users" visible="false" />
+                  <Button fx:id="settingsButton" onAction="#showSettings" styleClass="sidebar-button" text="⚙️ Settings" />
+               </children>
+            </VBox>
+            
+            <!-- Logout -->
+            <Region VBox.vgrow="ALWAYS" />
+            <Button fx:id="logoutButton" onAction="#handleLogout" styleClass="sidebar-button" text="🚪 Logout" />
+         </children>
+      </VBox>
+      
+      <!-- Main Content -->
+      <VBox styleClass="dashboard-container" spacing="20" HBox.hgrow="ALWAYS">
+         <children>
+            <!-- Header -->
+            <HBox alignment="CENTER_LEFT" style="-fx-padding: 20px; -fx-background-color: white; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+               <children>
+                  <Text fx:id="pageTitleLabel" style="-fx-text-fill: #2c3e50; -fx-font-size: 24px; -fx-font-weight: bold;" text="Dashboard" />
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Text fx:id="currentTimeLabel" style="-fx-text-fill: #7f8c8d; -fx-font-size: 14px;" text="Loading..." />
+               </children>
+            </HBox>
+            
+            <!-- Content Area -->
+            <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-padding: 20px;">
+               <content>
+                  <VBox spacing="20" style="-fx-padding: 0 20px;">
+                     <children>
+                        <!-- Time Tracking Card -->
+                        <VBox styleClass="card" spacing="15">
+                           <children>
+                              <Text style="-fx-text-fill: #2c3e50; -fx-font-size: 20px; -fx-font-weight: bold;" text="Time Tracking" />
+                              
+                              <!-- Current Status -->
+                              <HBox alignment="CENTER" spacing="20">
+                                 <children>
+                                    <VBox alignment="CENTER" spacing="5">
+                                       <children>
+                                          <Text fx:id="statusLabel" style="-fx-text-fill: #27ae60; -fx-font-size: 16px; -fx-font-weight: bold;" text="Not Working" />
+                                          <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="Current Status" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <Region style="-fx-pref-width: 1px; -fx-background-color: #ecf0f1;" />
+                                    
+                                    <VBox alignment="CENTER" spacing="5">
+                                       <children>
+                                          <Text fx:id="todayHoursLabel" style="-fx-text-fill: #2c3e50; -fx-font-size: 16px; -fx-font-weight: bold;" text="0.0h" />
+                                          <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="Today's Hours" />
+                                       </children>
+                                    </VBox>
+                                    
+                                    <Region style="-fx-pref-width: 1px; -fx-background-color: #ecf0f1;" />
+                                    
+                                    <VBox alignment="CENTER" spacing="5">
+                                       <children>
+                                          <Text fx:id="weekHoursLabel" style="-fx-text-fill: #2c3e50; -fx-font-size: 16px; -fx-font-weight: bold;" text="0.0h" />
+                                          <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="This Week" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              
+                              <!-- Action Buttons -->
+                              <HBox alignment="CENTER" spacing="15">
+                                 <children>
+                                    <Button fx:id="punchInButton" onAction="#handlePunchIn" styleClass="punch-in-button" text="Punch In" />
+                                    <Button fx:id="punchOutButton" onAction="#handlePunchOut" styleClass="punch-out-button" text="Punch Out" />
+                                    <Button fx:id="breakButton" onAction="#handleBreak" styleClass="break-button" text="Break" />
+                                 </children>
+                              </HBox>
+                              
+                              <!-- Notes -->
+                              <VBox spacing="5">
+                                 <children>
+                                    <Label text="Notes (optional):" />
+                                    <TextArea fx:id="notesTextArea" prefRowCount="2" promptText="Add notes about your work..." />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        
+                        <!-- Quick Stats -->
+                        <HBox spacing="20">
+                           <children>
+                              <!-- Projects Card -->
+                              <VBox styleClass="card" spacing="10" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Text style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="Active Projects" />
+                                    <Text fx:id="activeProjectsLabel" style="-fx-text-fill: #3498db; -fx-font-size: 24px; -fx-font-weight: bold;" text="0" />
+                                    <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="Projects you're working on" />
+                                 </children>
+                              </VBox>
+                              
+                              <!-- Tasks Card -->
+                              <VBox styleClass="card" spacing="10" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Text style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="Pending Tasks" />
+                                    <Text fx:id="pendingTasksLabel" style="-fx-text-fill: #e74c3c; -fx-font-size: 24px; -fx-font-weight: bold;" text="0" />
+                                    <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="Tasks to complete" />
+                                 </children>
+                              </VBox>
+                              
+                              <!-- Overtime Card -->
+                              <VBox styleClass="card" spacing="10" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Text style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="Overtime" />
+                                    <Text fx:id="overtimeLabel" style="-fx-text-fill: #f39c12; -fx-font-size: 24px; -fx-font-weight: bold;" text="0.0h" />
+                                    <Text style="-fx-text-fill: #7f8c8d; -fx-font-size: 12px;" text="This week" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                        
+                        <!-- Recent Activity -->
+                        <VBox styleClass="card" spacing="15">
+                           <children>
+                              <Text style="-fx-text-fill: #2c3e50; -fx-font-size: 18px; -fx-font-weight: bold;" text="Recent Activity" />
+                              <ListView fx:id="activityListView" prefHeight="150" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</HBox> 
